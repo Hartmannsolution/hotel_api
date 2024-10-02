@@ -23,7 +23,7 @@ public class ApplicationConfig {
     private static final ExceptionController exceptionController = new ExceptionController();
 
     public static void configuration(JavalinConfig config) {
-        config.router.contextPath = "/api/v1"; // base path for all routes
+        config.router.contextPath = "/api"; // base path for all routes
         config.showJavalinBanner = false;
         config.http.defaultContentType = "application/json"; // default content type for requests
         config.router.apiBuilder(routes.getRoutes());

@@ -38,7 +38,7 @@ public class HotelDAO implements IDAO<HotelDTO, Integer> {
     @Override
     public List<HotelDTO> readAll() {
         try (EntityManager em = emf.createEntityManager()) {
-            TypedQuery<HotelDTO> query = em.createQuery("SELECT new dat.dtos.HotelDTO(h) FROM Hotel h", HotelDTO.class);
+            TypedQuery<HotelDTO> query = em.createQuery("SELECT new dat.rest.dtos.HotelDTO(h) FROM Hotel h", HotelDTO.class);
             return query.getResultList();
         }
     }

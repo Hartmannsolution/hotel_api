@@ -12,8 +12,9 @@ import jakarta.persistence.TypedQuery;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Set;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class RoomDAO implements IDAO<RoomDTO, Integer> {
@@ -51,10 +52,18 @@ public class RoomDAO implements IDAO<RoomDTO, Integer> {
     }
 
     @Override
-    public List<RoomDTO> readAll() {
+    public Set<RoomDTO> readAll() {
         try (EntityManager em = emf.createEntityManager()) {
-            TypedQuery<RoomDTO> query = em.createQuery("SELECT new dat.dtos.RoomDTO(r) FROM Room r", RoomDTO.class);
-            return query.getResultList();
+            TypedQuery<RoomDTO> query = em.createQuery("SELECT new dat.rest.dtos.RoomDTO(r) FROM Room r", RoomDTO.class);
+            return query.getResultStream().collect(Collectors.toSet());
+        }
+    }
+
+    public Set<RoomDTO> getByHotel(Integer hotelId) {
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<RoomDTO> query = em.createQuery("SELECT new dat.rest.dtos.RoomDTO(r) FROM Room r WHERE r.hotel.id = :hotelId", RoomDTO.class);
+            query.setParameter("hotelId", hotelId);
+            return query.getResultStream().collect(Collectors.toSet());
         }
     }
 

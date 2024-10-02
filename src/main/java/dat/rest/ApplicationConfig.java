@@ -24,6 +24,7 @@ public class ApplicationConfig {
 
     public static void configuration(JavalinConfig config) {
         config.router.contextPath = "/api"; // base path for all routes
+        config.bundledPlugins.enableDevLogging(); // enables extensive development logging in terminal
         config.showJavalinBanner = false;
         config.http.defaultContentType = "application/json"; // default content type for requests
         config.router.apiBuilder(routes.getRoutes());

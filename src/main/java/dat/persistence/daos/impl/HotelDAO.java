@@ -9,7 +9,8 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.TypedQuery;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class HotelDAO implements IDAO<HotelDTO, Integer> {
@@ -36,10 +37,10 @@ public class HotelDAO implements IDAO<HotelDTO, Integer> {
     }
 
     @Override
-    public List<HotelDTO> readAll() {
+    public Set<HotelDTO> readAll() {
         try (EntityManager em = emf.createEntityManager()) {
             TypedQuery<HotelDTO> query = em.createQuery("SELECT new dat.rest.dtos.HotelDTO(h) FROM Hotel h", HotelDTO.class);
-            return query.getResultList();
+            return query.getResultStream().collect(Collectors.toSet());
         }
     }
 

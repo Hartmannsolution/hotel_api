@@ -13,6 +13,7 @@ public class RoomRoute {
 
         return () -> {
             post("/hotel/{id}", roomController::create);
+            get("/hotel/{id}", roomController::getByHotel);
             get("/", roomController::readAll);
             get("/{id}", roomController::read);
             put("/{id}", roomController::update);

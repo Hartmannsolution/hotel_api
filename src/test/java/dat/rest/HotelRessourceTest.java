@@ -15,6 +15,7 @@ import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 import java.math.BigDecimal;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -43,7 +44,7 @@ class HotelRessourceTest {
         r2 = new Room(102, new BigDecimal(1500), Room.RoomType.DOUBLE);
         r3 = new Room(103, new BigDecimal(1500), Room.RoomType.SUITE);
         h1.addRoom(r1);
-        h2.addRoom(r2);
+        h1.addRoom(r2);
         h2.addRoom(r3);
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
@@ -133,5 +134,25 @@ class HotelRessourceTest {
     public void testDeletingAHotel() {
         given().when().delete("/hotel/" + h1.getId())
                 .then().statusCode(204);
+    }
+    @Test
+    @DisplayName("Get all rooms")
+    public void testGettingAllRooms() {
+        System.out.println("Testing is server UP");
+        given().when().get("/room")
+                .then()
+                .statusCode(200)
+                .body("size()", equalTo(3))
+                .body("roomNumber", containsInAnyOrder(101, 102, 103));
+    }
+
+    @Test
+    @DisplayName("Get a rooms by hotel id")
+    public void testGettingARoom() {
+        given().when().get("/room/hotel/" + h1.getId())
+                .then()
+                .statusCode(200)
+                .body("size()", equalTo(2))
+                .body("roomNumber", containsInAnyOrder(101, 102));
     }
 }

@@ -4,7 +4,7 @@ import dat.persistence.entities.Room;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @Getter
@@ -21,8 +21,8 @@ public class RoomDTO {
         this.roomType = room.getRoomType();
     }
 
-    public static List<RoomDTO> toRoomDTOList(List<Room> rooms) {
-        return List.of(rooms.stream().map(RoomDTO::new).toArray(RoomDTO[]::new));
+    public static Set<RoomDTO> toRoomDTOSet(Set<Room> rooms) {
+        return Set.of(rooms.stream().map(RoomDTO::new).toArray(RoomDTO[]::new));
     }
 
     @Override

@@ -11,7 +11,7 @@ It is implemented using Javalin and JPA
 2. Run the main method in the config.Populate class to populate the database with some data
 3. Run the main method in the Main class to start the server on port 7070
 4. See the routes in your browser at `http://localhost:7070/routes`
-5. Request the `http://localhost:7070/hotels` endpoint in your browser to see the list of hotels and rooms
+5. Request the `http://localhost:7070/hotels` endpoint in your browser to see the Set of hotels and rooms
 6. Use the dev.http file to test the routes, GET/POST/PUT/DELETE requests are available
 
 # repo auto created

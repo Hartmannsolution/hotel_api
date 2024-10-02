@@ -8,7 +8,7 @@ import dat.persistence.entities.Hotel;
 import io.javalin.http.Context;
 import jakarta.persistence.EntityManagerFactory;
 
-import java.util.List;
+import java.util.Set;
 
 public class HotelController implements IController<HotelDTO, Integer> {
 
@@ -32,8 +32,8 @@ public class HotelController implements IController<HotelDTO, Integer> {
 
     @Override
     public void readAll(Context ctx) {
-        // List of DTOS
-        List<HotelDTO> hotelDTOS = dao.readAll();
+        // Set of DTOS
+        Set<HotelDTO> hotelDTOS = dao.readAll();
         // response
         ctx.res().setStatus(200);
         ctx.json(hotelDTOS, HotelDTO.class);

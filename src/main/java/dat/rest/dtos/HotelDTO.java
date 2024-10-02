@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
-import java.util.List;
+import java.util.Set;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -37,8 +37,8 @@ public class HotelDTO {
         this.hotelType = hotelType;
     }
 
-    public static List<HotelDTO> toHotelDTOList(List<Hotel> hotels) {
-        return hotels.stream().map(HotelDTO::new).collect(Collectors.toList());
+    public static Set<HotelDTO> toHotelDTOSet(Set<Hotel> hotels) {
+        return hotels.stream().map(HotelDTO::new).collect(Collectors.toSet());
     }
 
     // equals NOT on ID, but on name, address and type

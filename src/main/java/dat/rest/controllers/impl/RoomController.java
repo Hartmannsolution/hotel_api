@@ -9,7 +9,7 @@ import dat.rest.exceptions.Message;
 import io.javalin.http.Context;
 import jakarta.persistence.EntityManagerFactory;
 
-import java.util.List;
+import java.util.Set;
 import java.util.function.BiFunction;
 
 public class RoomController implements IController<RoomDTO, Integer> {
@@ -31,11 +31,21 @@ public class RoomController implements IController<RoomDTO, Integer> {
         ctx.res().setStatus(200);
         ctx.json(roomDTO, RoomDTO.class);
     }
+    
+    public void getByHotel(Context ctx) {
+        // request
+        int id = ctx.pathParamAsClass("id", Integer.class).check(this::validatePrimaryKey, "Not a valid id").get();
+        // entity
+        Set<RoomDTO> roomDTOS = dao.getByHotel(id);
+        // response
+        ctx.res().setStatus(200);
+        ctx.json(roomDTOS, RoomDTO.class);
+    }
 
     @Override
     public void readAll(Context ctx) {
         // entity
-        List<RoomDTO> roomDTOS = dao.readAll();
+        Set<RoomDTO> roomDTOS = dao.readAll();
         // response
         ctx.res().setStatus(200);
         ctx.json(roomDTOS, RoomDTO.class);

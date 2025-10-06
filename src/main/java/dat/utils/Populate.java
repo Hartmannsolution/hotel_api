@@ -12,6 +12,9 @@ import java.util.Set;
 
 public class Populate {
     public static void main(String[] args) {
+        new Populate().createHotels();
+    }
+    public void createHotels(){
 
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory("hotel");
 

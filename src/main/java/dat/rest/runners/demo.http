@@ -1,0 +1,4 @@
+###
+GET http://localhost:7070/api/populate
+###
+GET http://localhost:7070/api/hotel

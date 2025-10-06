@@ -94,6 +94,7 @@ class HotelRessourceTest {
         String json = null;
         try {
             json = objectMapper.writeValueAsString(hotelDTO);
+            System.out.println(json);
         } catch (org.testcontainers.shaded.com.fasterxml.jackson.core.JsonProcessingException e) {
             e.printStackTrace();
         }

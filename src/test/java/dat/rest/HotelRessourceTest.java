@@ -1,6 +1,5 @@
 package dat.rest;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import dat.persistence.HibernateConfig;
 import dat.persistence.daos.impl.HotelDAO;
 import dat.persistence.entities.Hotel;
@@ -17,7 +16,6 @@ import java.math.BigDecimal;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.equalTo;
-import static org.junit.jupiter.api.Assertions.*;
 
 class HotelRessourceTest {
     private static EntityManagerFactory emf;
@@ -48,6 +46,8 @@ class HotelRessourceTest {
         h2.addRoom(r3);
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
+            em.createNamedQuery("Room.deleteAllRows").executeUpdate();
+            em.createNamedQuery("Hotel.deleteAllRows").executeUpdate();
             em.persist(h1);
             em.persist(h2);
             em.persist(h3);

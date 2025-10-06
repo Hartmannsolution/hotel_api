@@ -14,6 +14,12 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "hotel")
+@NamedQueries(
+        {
+                @NamedQuery(name = "Hotel.deleteAllRows", query = "DELETE from Hotel"),
+                @NamedQuery(name = "Hotel.getAll", query = "SELECT h FROM Hotel h")
+        }
+)
 public class Hotel {
 
     @Id

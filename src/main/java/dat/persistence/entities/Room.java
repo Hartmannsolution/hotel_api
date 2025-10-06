@@ -13,6 +13,10 @@ import java.util.Objects;
 @NoArgsConstructor
 @Entity
 @Table(name = "room")
+@NamedQueries({
+        @NamedQuery(name = "Room.deleteAllRows", query = "DELETE from Room"),
+        @NamedQuery(name = "Room.getAll", query = "SELECT r FROM Room r")
+})
 public class Room {
 
     @Id
